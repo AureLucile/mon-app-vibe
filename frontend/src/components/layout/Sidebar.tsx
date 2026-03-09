@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import {
   LayoutDashboard,
   Upload,
+  BookTemplate,
   Settings,
   FileBarChart,
   Globe,
@@ -12,6 +13,7 @@ import { cn } from '@/lib/utils'
 const navItems = [
   { to: '/', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
   { to: '/submit', icon: Upload, labelKey: 'nav.submit' },
+  { to: '/templates', icon: BookTemplate, labelKey: 'nav.templates' },
   { to: '/history', icon: FileBarChart, labelKey: 'nav.history' },
   { to: '/admin', icon: Settings, labelKey: 'nav.admin' },
 ]

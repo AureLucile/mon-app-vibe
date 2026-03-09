@@ -11,8 +11,14 @@ const resources = {
       nav: {
         dashboard: 'Tableau de bord',
         submit: 'Soumettre',
+        templates: 'Modèles',
         history: 'Historique',
         admin: 'Administration',
+      },
+      templates: {
+        title: 'Modèles de présentation',
+        subtitle: 'Des structures types pour chaque réunion, prêtes à être utilisées.',
+        hint: 'Chaque modèle est aligné avec la grille de critères utilisée par l\'IA. Suivre la structure recommandée maximise votre score.',
       },
       dashboard: {
         title: 'Tableau de bord',
@@ -104,8 +110,14 @@ const resources = {
       nav: {
         dashboard: 'Dashboard',
         submit: 'Submit',
+        templates: 'Templates',
         history: 'History',
         admin: 'Administration',
+      },
+      templates: {
+        title: 'Presentation Templates',
+        subtitle: 'Ready-to-use structures for each meeting type.',
+        hint: 'Each template is aligned with the AI criteria grid. Following the recommended structure maximizes your score.',
       },
       dashboard: {
         title: 'Dashboard',
