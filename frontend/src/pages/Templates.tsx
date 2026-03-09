@@ -69,6 +69,17 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
                 {duration}
               </span>
             </div>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleDownload}
+              disabled={downloading}
+            >
+              <Download size={14} />
+              {downloading
+                ? lang === 'fr' ? 'Génération...' : 'Generating...'
+                : lang === 'fr' ? 'Télécharger .pptx' : 'Download .pptx'}
+            </Button>
             {expanded ? (
               <ChevronUp size={20} className="text-gray-400" />
             ) : (
