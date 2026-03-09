@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Upload,
   BookTemplate,
+  MessageSquare,
   Settings,
   FileBarChart,
   Globe,
@@ -14,6 +15,7 @@ const navItems = [
   { to: '/', icon: LayoutDashboard, labelKey: 'nav.dashboard' },
   { to: '/submit', icon: Upload, labelKey: 'nav.submit' },
   { to: '/templates', icon: BookTemplate, labelKey: 'nav.templates' },
+  { to: '/chat', icon: MessageSquare, labelKey: 'nav.chat' },
   { to: '/history', icon: FileBarChart, labelKey: 'nav.history' },
   { to: '/admin', icon: Settings, labelKey: 'nav.admin' },
 ]

@@ -5,6 +5,7 @@ import { Submit } from '@/pages/Submit'
 import { Results } from '@/pages/Results'
 import { History } from '@/pages/History'
 import { Templates } from '@/pages/Templates'
+import { Chat } from '@/pages/Chat'
 import { Admin } from '@/pages/Admin'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/submit" element={<Submit />} />
           <Route path="/results/:id" element={<Results />} />
           <Route path="/templates" element={<Templates />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/history" element={<History />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
