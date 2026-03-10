@@ -77,6 +77,9 @@ const resources = {
         backToDashboard: 'Retour au tableau de bord',
         weight: 'Pondération',
         slidesRef: 'Slides concernées',
+        downloadImproved: 'Télécharger la version améliorée',
+        improvedReady: 'Votre présentation améliorée est prête !',
+        improvedDesc: 'L\'IA a appliqué les corrections directement dans votre fichier PowerPoint. Téléchargez la version révisée.',
       },
       suggestion: {
         reformulation: 'Reformulation proposée',
@@ -186,6 +189,9 @@ const resources = {
         backToDashboard: 'Back to dashboard',
         weight: 'Weight',
         slidesRef: 'Slides referenced',
+        downloadImproved: 'Download improved version',
+        improvedReady: 'Your improved presentation is ready!',
+        improvedDesc: 'The AI has applied corrections directly in your PowerPoint file. Download the revised version.',
       },
       suggestion: {
         reformulation: 'Suggested reformulation',

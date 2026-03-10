@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
   RadarChart,
   Radar,
@@ -15,6 +15,7 @@ import {
   ArrowLeft,
   RefreshCw,
   MessageSquare,
+  Download,
 } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -24,11 +25,23 @@ import { Progress } from '@/components/ui/Progress'
 import { mockReport } from '@/lib/mock-data'
 import { MEETING_TYPES } from '@/lib/types'
 import { getScoreColor, getScoreLabel } from '@/lib/utils'
+import { getDownloadUrl } from '@/lib/api'
 
 export function Results() {
   const { t, i18n } = useTranslation()
   const lang = i18n.language
-  const report = mockReport
+  const location = useLocation()
+
+  // Use real data from navigation state, fall back to mock
+  const state = location.state as {
+    report?: typeof mockReport
+    downloadId?: string | null
+    fileName?: string
+  } | null
+
+  const report = state?.report ?? mockReport
+  const downloadId = state?.downloadId ?? null
+  const fileName = state?.fileName ?? null
 
   const meetingLabel = MEETING_TYPES.find((m) => m.id === report.meetingType)
   const radarData = report.criteriaScores.map((c) => ({
@@ -56,15 +69,61 @@ export function Results() {
             </Button>
           </Link>
         </div>
-        <Link to="/submit">
-          <Button variant="secondary">
-            <RefreshCw size={16} />
-            {t('results.resubmit')}
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          {downloadId && (
+            <a href={getDownloadUrl(downloadId)} download>
+              <Button>
+                <Download size={16} />
+                {t('results.downloadImproved')}
+              </Button>
+            </a>
+          )}
+          <Link to="/submit">
+            <Button variant="secondary">
+              <RefreshCw size={16} />
+              {t('results.resubmit')}
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <h1 className="text-2xl font-bold text-[#003B80]">{t('results.title')}</h1>
+
+      {/* File info */}
+      {fileName && (
+        <p className="text-sm text-gray-500">
+          {t('common.file')} : {fileName}
+        </p>
+      )}
+
+      {/* Download banner */}
+      {downloadId && (
+        <Card className="border-[#009EE0]/30 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardContent className="py-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#009EE0]/10 flex items-center justify-center">
+                  <Download size={20} className="text-[#009EE0]" />
+                </div>
+                <div>
+                  <p className="font-semibold text-[#003B80]">
+                    {t('results.improvedReady')}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {t('results.improvedDesc')}
+                  </p>
+                </div>
+              </div>
+              <a href={getDownloadUrl(downloadId)} download>
+                <Button>
+                  <Download size={16} />
+                  {t('results.downloadImproved')}
+                </Button>
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Overall Score + Radar */}
       <div className="grid grid-cols-2 gap-6">
@@ -198,11 +257,15 @@ export function Results() {
                 {sug.before && sug.after && (
                   <div className="mt-3 grid grid-cols-2 gap-3">
                     <div className="p-3 bg-red-50 border border-red-100 rounded text-sm text-red-800">
-                      <p className="text-xs font-medium text-red-500 mb-1">Avant</p>
+                      <p className="text-xs font-medium text-red-500 mb-1">
+                        {lang === 'fr' ? 'Avant' : 'Before'}
+                      </p>
                       {sug.before}
                     </div>
                     <div className="p-3 bg-emerald-50 border border-emerald-100 rounded text-sm text-emerald-800">
-                      <p className="text-xs font-medium text-emerald-500 mb-1">Après</p>
+                      <p className="text-xs font-medium text-emerald-500 mb-1">
+                        {lang === 'fr' ? 'Après' : 'After'}
+                      </p>
                       {sug.after}
                     </div>
                   </div>

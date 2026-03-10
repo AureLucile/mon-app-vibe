@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { MEETING_TYPES, type MeetingType, type AudienceType } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { analyzePresentation } from '@/lib/api'
 
 const AUDIENCES: { id: AudienceType; labelKey: string }[] = [
   { id: 'direction', labelKey: 'audience.direction' },
@@ -25,6 +26,7 @@ export function Submit() {
   const [audience, setAudience] = useState<AudienceType | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault()
@@ -42,13 +44,24 @@ export function Submit() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!file || !meetingType) return
     setIsAnalyzing(true)
-    // Simulate analysis
-    setTimeout(() => {
-      navigate('/results/s-001')
-    }, 3000)
+    setError(null)
+
+    try {
+      const result = await analyzePresentation(file, meetingType, audience, lang)
+      navigate(`/results/${result.report.submissionId}`, {
+        state: {
+          report: result.report,
+          downloadId: result.downloadId,
+          fileName: file.name,
+        },
+      })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue')
+      setIsAnalyzing(false)
+    }
   }
 
   if (isAnalyzing) {
@@ -84,6 +97,14 @@ export function Submit() {
         <AlertTriangle size={20} className="text-amber-600 mt-0.5 shrink-0" />
         <p className="text-sm text-amber-800">{t('submit.warning')}</p>
       </div>
+
+      {/* Error */}
+      {error && (
+        <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <AlertTriangle size={20} className="text-red-600 mt-0.5 shrink-0" />
+          <p className="text-sm text-red-800">{error}</p>
+        </div>
+      )}
 
       {/* File Upload */}
       <Card>
