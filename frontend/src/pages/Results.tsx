@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import {
   RadarChart,
   Radar,
@@ -16,6 +17,7 @@ import {
   RefreshCw,
   MessageSquare,
   Download,
+  Loader2,
 } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -23,28 +25,89 @@ import { Badge } from '@/components/ui/Badge'
 import { ScoreCircle } from '@/components/ui/ScoreCircle'
 import { Progress } from '@/components/ui/Progress'
 import { mockReport } from '@/lib/mock-data'
-import { MEETING_TYPES } from '@/lib/types'
+import { MEETING_TYPES, type CoachReport } from '@/lib/types'
 import { getScoreColor, getScoreLabel } from '@/lib/utils'
-import { getDownloadUrl } from '@/lib/api'
+import { supabase } from '@/lib/supabase'
 
 export function Results() {
   const { t, i18n } = useTranslation()
   const lang = i18n.language
   const location = useLocation()
+  const { id } = useParams()
 
-  // Use real data from navigation state, fall back to mock
-  const state = location.state as {
-    report?: typeof mockReport
-    downloadId?: string | null
+  // State from navigation (coming from Submit page)
+  const navState = location.state as {
+    report?: CoachReport
+    downloadUrl?: string | null
     fileName?: string
   } | null
 
-  const report = state?.report ?? mockReport
-  const downloadId = state?.downloadId ?? null
-  const fileName = state?.fileName ?? null
+  const [report, setReport] = useState<CoachReport | null>(navState?.report ?? null)
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(navState?.downloadUrl ?? null)
+  const [fileName, setFileName] = useState<string | null>(navState?.fileName ?? null)
+  const [loading, setLoading] = useState(!navState?.report)
 
-  const meetingLabel = MEETING_TYPES.find((m) => m.id === report.meetingType)
-  const radarData = report.criteriaScores.map((c) => ({
+  // If no navigation state, fetch from Supabase DB
+  useEffect(() => {
+    if (navState?.report) return
+
+    async function fetchReport() {
+      const { data: sub } = await supabase
+        .from('submissions')
+        .select('file_name')
+        .eq('id', id)
+        .single()
+
+      const { data: rep } = await supabase
+        .from('reports')
+        .select('*')
+        .eq('submission_id', id)
+        .single()
+
+      if (rep) {
+        setReport({
+          id: rep.id,
+          submissionId: rep.submission_id,
+          meetingType: rep.meeting_type,
+          overallScore: rep.overall_score,
+          criteriaScores: rep.criteria_scores,
+          strengths: rep.strengths,
+          improvements: rep.improvements,
+          suggestions: rep.suggestions,
+          encouragement: rep.encouragement,
+          language: rep.language,
+          createdAt: rep.created_at,
+        })
+
+        if (rep.improved_storage_path) {
+          const { data: urlData } = supabase.storage
+            .from('presentations')
+            .getPublicUrl(rep.improved_storage_path)
+          setDownloadUrl(urlData.publicUrl)
+        }
+      }
+
+      if (sub) setFileName(sub.file_name)
+      setLoading(false)
+    }
+
+    fetchReport()
+  }, [id, navState])
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-20">
+        <Loader2 size={32} className="text-[#009EE0] animate-spin" />
+      </div>
+    )
+  }
+
+  // Fallback to mock data if nothing found
+  const displayReport = report ?? mockReport
+
+  const meetingLabel = MEETING_TYPES.find((m) => m.id === displayReport.meetingType)
+  const radarData = displayReport.criteriaScores.map((c) => ({
     criterion: c.name.length > 25 ? c.name.substring(0, 25) + '...' : c.name,
     score: c.score,
     fullMark: 5,
@@ -70,8 +133,8 @@ export function Results() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
-          {downloadId && (
-            <a href={getDownloadUrl(downloadId)} download>
+          {downloadUrl && (
+            <a href={downloadUrl} download>
               <Button>
                 <Download size={16} />
                 {t('results.downloadImproved')}
@@ -97,7 +160,7 @@ export function Results() {
       )}
 
       {/* Download banner */}
-      {downloadId && (
+      {downloadUrl && (
         <Card className="border-[#009EE0]/30 bg-gradient-to-r from-blue-50 to-indigo-50">
           <CardContent className="py-5">
             <div className="flex items-center justify-between">
@@ -114,7 +177,7 @@ export function Results() {
                   </p>
                 </div>
               </div>
-              <a href={getDownloadUrl(downloadId)} download>
+              <a href={downloadUrl} download>
                 <Button>
                   <Download size={16} />
                   {t('results.downloadImproved')}
@@ -129,10 +192,10 @@ export function Results() {
       <div className="grid grid-cols-2 gap-6">
         <Card>
           <CardContent className="flex flex-col items-center py-8 gap-4">
-            <ScoreCircle score={report.overallScore} size="lg" />
+            <ScoreCircle score={displayReport.overallScore} size="lg" />
             <div className="text-center">
-              <p className={`text-lg font-semibold ${getScoreColor(report.overallScore)}`}>
-                {getScoreLabel(report.overallScore, lang)}
+              <p className={`text-lg font-semibold ${getScoreColor(displayReport.overallScore)}`}>
+                {getScoreLabel(displayReport.overallScore, lang)}
               </p>
               <p className="text-sm text-gray-500 mt-1">
                 {meetingLabel
@@ -171,7 +234,7 @@ export function Results() {
           <h2 className="font-semibold text-[#003B80]">{t('results.criteriaBreakdown')}</h2>
         </CardHeader>
         <CardContent className="space-y-5">
-          {report.criteriaScores.map((criterion) => (
+          {displayReport.criteriaScores.map((criterion) => (
             <div key={criterion.name} className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -205,7 +268,7 @@ export function Results() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {report.strengths.map((s, i) => (
+              {displayReport.strengths.map((s, i) => (
                 <li key={i} className="flex gap-3 text-sm text-gray-700">
                   <span className="text-emerald-500 mt-1 shrink-0">+</span>
                   {s}
@@ -222,7 +285,7 @@ export function Results() {
           </CardHeader>
           <CardContent>
             <ol className="space-y-3">
-              {report.improvements.map((imp, i) => (
+              {displayReport.improvements.map((imp, i) => (
                 <li key={i} className="flex gap-3 text-sm text-gray-700">
                   <span className="text-amber-500 font-bold shrink-0">{i + 1}.</span>
                   {imp}
@@ -240,7 +303,7 @@ export function Results() {
           <h2 className="font-semibold text-[#003B80]">{t('results.suggestions')}</h2>
         </CardHeader>
         <CardContent className="space-y-4">
-          {report.suggestions.map((sug, i) => {
+          {displayReport.suggestions.map((sug, i) => {
             const Icon = suggestionIcons[sug.type] ?? Lightbulb
             return (
               <div key={i} className="p-4 bg-gray-50 rounded-lg border border-gray-100">
@@ -280,7 +343,7 @@ export function Results() {
       <Card className="border-[#009EE0]/20 bg-blue-50/50">
         <CardContent className="py-6">
           <p className="text-sm text-[#003B80] leading-relaxed italic">
-            "{report.encouragement}"
+            "{displayReport.encouragement}"
           </p>
         </CardContent>
       </Card>

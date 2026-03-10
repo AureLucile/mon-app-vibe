@@ -54,7 +54,7 @@ export function Submit() {
       navigate(`/results/${result.report.submissionId}`, {
         state: {
           report: result.report,
-          downloadId: result.downloadId,
+          downloadUrl: result.downloadUrl,
           fileName: file.name,
         },
       })
