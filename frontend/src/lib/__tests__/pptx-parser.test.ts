@@ -2,17 +2,6 @@ import { describe, it, expect } from 'vitest'
 import JSZip from 'jszip'
 import { parsePptx } from '../pptx-parser'
 
-function createMockPptxFile(slides: Record<string, string>): File {
-  // We build the zip synchronously-ish via a helper
-  // but parsePptx expects a File, so we return a File-like Blob
-  const zip = new JSZip()
-  for (const [path, content] of Object.entries(slides)) {
-    zip.file(path, content)
-  }
-  // We'll generate the blob and wrap it
-  return null as unknown as File // placeholder, replaced in async helper
-}
-
 async function buildPptxFile(
   slides: Record<string, string>,
   name = 'test.pptx'

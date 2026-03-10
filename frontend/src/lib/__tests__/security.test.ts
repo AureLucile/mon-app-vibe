@@ -40,12 +40,12 @@ describe('Securite XSS — contenu PPTX', () => {
     // Le regex /<a:t>([^<]*)<\/a:t>/ coupe au premier '<' dans le texte
     // Cela empeche naturellement les balises HTML d'etre extraites intactes
     const xssPayloads = [
-      { input: '<img src=x onerror=alert(1)>', extracted: '' },
-      { input: '<svg onload=alert(1)>', extracted: '' },
-      { input: '<iframe src="evil.com">', extracted: '' },
+      { input: '<img src=x onerror=alert(1)>' },
+      { input: '<svg onload=alert(1)>' },
+      { input: '<iframe src="evil.com">' },
     ]
 
-    for (const { input, extracted } of xssPayloads) {
+    for (const { input } of xssPayloads) {
       const slideXml = `<p:sld><p:cSld><p:spTree>
         <p:sp><p:txBody>
           <a:p><a:r><a:t>${input}</a:t></a:r></a:p>
@@ -231,8 +231,7 @@ describe('Securite Upload — validation fichier', () => {
 
     const ALLOWED_EXTENSIONS = ['.pptx']
 
-    for (const { name, type } of dangerousFiles) {
-      const file = new File([new Blob(['content'])], name, { type })
+    for (const { name } of dangerousFiles) {
       const ext = '.' + name.split('.').pop()!.toLowerCase()
       expect(ALLOWED_EXTENSIONS.includes(ext)).toBe(false)
     }
