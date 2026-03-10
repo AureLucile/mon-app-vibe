@@ -28,10 +28,10 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#1E2761] text-white flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#003B80] text-white flex flex-col">
       <div className="px-6 py-6 border-b border-white/10">
         <h1 className="text-xl font-bold tracking-tight">
-          <span className="text-[#3B82F6]">Deck</span>Review AI
+          <span className="text-[#009EE0]">Deck</span>Review AI
         </h1>
         <p className="text-sm text-blue-200/70 mt-0.5">{t('app.tagline')}</p>
       </div>

@@ -2,9 +2,9 @@ import PptxGenJS from 'pptxgenjs'
 import type { PresentationTemplate } from './templates'
 import { MEETING_TYPES } from './types'
 
-const NAVY = '1E2761'
-const BLUE = '3B82F6'
-const LIGHT_BG = 'F8FAFC'
+const NAVY = '003B80'
+const BLUE = '009EE0'
+const LIGHT_BG = 'F5F7FA'
 const WHITE = 'FFFFFF'
 const GRAY = '64748B'
 

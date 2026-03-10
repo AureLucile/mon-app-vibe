@@ -15,7 +15,7 @@ export function Progress({ value, max = 100, className, indicatorClassName }: Pr
       <div
         className={cn(
           'h-full rounded-full transition-all duration-500',
-          percent >= 70 ? 'bg-emerald-500' : percent >= 50 ? 'bg-amber-500' : 'bg-red-500',
+          percent >= 70 ? 'bg-[#00A15F]' : percent >= 50 ? 'bg-[#E4751F]' : 'bg-[#E2001A]',
           indicatorClassName
         )}
         style={{ width: `${percent}%` }}

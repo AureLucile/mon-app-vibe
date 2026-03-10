@@ -55,7 +55,7 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
       >
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-[#1E2761] text-lg">{label}</h3>
+            <h3 className="font-semibold text-[#003B80] text-lg">{label}</h3>
             <p className="text-sm text-gray-500 mt-0.5">{description}</p>
           </div>
           <div className="flex items-center gap-3">
@@ -99,7 +99,7 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
                 className={cn(
                   'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer',
                   viewMode === 'slides'
-                    ? 'bg-white text-[#1E2761] shadow-sm'
+                    ? 'bg-white text-[#003B80] shadow-sm'
                     : 'text-gray-500 hover:text-gray-700'
                 )}
               >
@@ -111,7 +111,7 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
                 className={cn(
                   'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer',
                   viewMode === 'list'
-                    ? 'bg-white text-[#1E2761] shadow-sm'
+                    ? 'bg-white text-[#003B80] shadow-sm'
                     : 'text-gray-500 hover:text-gray-700'
                 )}
               >
@@ -144,7 +144,7 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
                     className={cn(
                       'cursor-pointer rounded-lg transition-all',
                       currentSlide === index
-                        ? 'ring-2 ring-[#3B82F6] ring-offset-2'
+                        ? 'ring-2 ring-[#009EE0] ring-offset-2'
                         : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-1'
                     )}
                     onClick={() => setCurrentSlide(index)}
@@ -161,7 +161,7 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
               {/* Large preview of selected slide */}
               <div className="mt-6 border-t border-gray-100 pt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-sm font-semibold text-[#1E2761]">
+                  <h4 className="text-sm font-semibold text-[#003B80]">
                     Slide {currentSlide + 1} / {template.totalSlides}
                   </h4>
                   <div className="flex items-center gap-2">
@@ -200,11 +200,11 @@ function TemplateCard({ template }: { template: PresentationTemplate }) {
                   key={slide.number}
                   className="flex gap-4 p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors"
                 >
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[#1E2761] text-white flex items-center justify-center font-bold text-sm">
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[#003B80] text-white flex items-center justify-center font-bold text-sm">
                     {slide.number}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-[#1E2761] text-sm">
+                    <h4 className="font-semibold text-[#003B80] text-sm">
                       {lang === 'fr' ? slide.titleFr : slide.titleEn}
                     </h4>
                     <p className="text-sm text-gray-600 mt-1">
@@ -233,7 +233,7 @@ export function Templates() {
   return (
     <div className="max-w-5xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#1E2761]">{t('templates.title')}</h1>
+        <h1 className="text-2xl font-bold text-[#003B80]">{t('templates.title')}</h1>
         <p className="text-gray-500 mt-1">{t('templates.subtitle')}</p>
       </div>
 

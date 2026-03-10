@@ -19,7 +19,7 @@ export function History() {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <h1 className="text-2xl font-bold text-[#1E2761]">{t('nav.history')}</h1>
+      <h1 className="text-2xl font-bold text-[#003B80]">{t('nav.history')}</h1>
 
       <Card>
         <CardHeader>
@@ -41,7 +41,7 @@ export function History() {
             <tbody>
               {mockSubmissions.map((sub) => (
                 <tr key={sub.id} className="border-b border-gray-50 hover:bg-gray-50/50">
-                  <td className="px-6 py-4 text-sm font-medium text-[#1E2761]">
+                  <td className="px-6 py-4 text-sm font-medium text-[#003B80]">
                     {sub.fileName}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">

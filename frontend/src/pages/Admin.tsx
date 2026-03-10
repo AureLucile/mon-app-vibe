@@ -72,12 +72,12 @@ export function Admin() {
 
   return (
     <div className="max-w-6xl space-y-6">
-      <h1 className="text-2xl font-bold text-[#1E2761]">{t('admin.title')}</h1>
+      <h1 className="text-2xl font-bold text-[#003B80]">{t('admin.title')}</h1>
 
       {/* Analytics */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <h2 className="font-semibold text-[#1E2761]">{t('admin.avgByType')}</h2>
+          <h2 className="font-semibold text-[#003B80]">{t('admin.avgByType')}</h2>
           <Badge variant="info">{t('admin.totalAnalyses')}: 127</Badge>
         </CardHeader>
         <CardContent className="h-72">
@@ -87,7 +87,7 @@ export function Admin() {
               <XAxis dataKey="type" tick={{ fontSize: 12 }} />
               <YAxis domain={[0, 5]} tick={{ fontSize: 12 }} />
               <Tooltip />
-              <Bar dataKey="score" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="score" fill="#009EE0" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -95,12 +95,12 @@ export function Admin() {
 
       {/* Grids */}
       <div>
-        <h2 className="font-semibold text-[#1E2761] text-lg mb-4">{t('admin.grids')}</h2>
+        <h2 className="font-semibold text-[#003B80] text-lg mb-4">{t('admin.grids')}</h2>
         <div className="grid grid-cols-2 gap-4">
           {MEETING_TYPES.map((mt) => (
             <Card key={mt.id}>
               <CardHeader>
-                <h3 className="font-semibold text-[#1E2761]">
+                <h3 className="font-semibold text-[#003B80]">
                   {lang === 'fr' ? mt.labelFr : mt.labelEn}
                 </h3>
                 <p className="text-sm text-gray-500">
@@ -119,7 +119,7 @@ export function Admin() {
                     {criteriaByType[mt.id]?.map((c) => (
                       <tr key={c.name} className="border-b border-gray-50">
                         <td className="py-2 text-sm text-gray-700">{c.name}</td>
-                        <td className="py-2 text-sm text-right font-medium text-[#1E2761]">
+                        <td className="py-2 text-sm text-right font-medium text-[#003B80]">
                           {c.weight}%
                         </td>
                       </tr>

@@ -162,11 +162,11 @@ export function Chat() {
       <div className="flex items-center justify-center h-[80vh]">
         <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-8 max-w-sm w-full">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2.5 bg-[#1E2761] rounded-lg">
+            <div className="p-2.5 bg-[#003B80] rounded-lg">
               <MessageSquare size={20} className="text-white" />
             </div>
             <div>
-              <h2 className="font-bold text-[#1E2761]">{t('chat.welcomeTitle')}</h2>
+              <h2 className="font-bold text-[#003B80]">{t('chat.welcomeTitle')}</h2>
               <p className="text-sm text-gray-500">{t('chat.welcomeDesc')}</p>
             </div>
           </div>
@@ -179,13 +179,13 @@ export function Chat() {
             onChange={(e) => setNameInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSetName()}
             placeholder={lang === 'fr' ? 'Ex : Marie Dupont' : 'E.g., John Smith'}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#009EE0] focus:border-transparent"
             autoFocus
           />
           <button
             onClick={handleSetName}
             disabled={!nameInput.trim()}
-            className="mt-4 w-full bg-[#3B82F6] text-white py-2.5 rounded-lg font-medium text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
+            className="mt-4 w-full bg-[#009EE0] text-white py-2.5 rounded-lg font-medium text-sm hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
           >
             {t('chat.join')}
           </button>
@@ -211,7 +211,7 @@ export function Chat() {
       {/* Channel sidebar */}
       <div className="w-64 shrink-0 bg-white border-r border-gray-200 flex flex-col rounded-l-xl">
         <div className="p-4 border-b border-gray-100">
-          <h2 className="font-semibold text-[#1E2761] flex items-center gap-2">
+          <h2 className="font-semibold text-[#003B80] flex items-center gap-2">
             <MessageSquare size={18} />
             {t('chat.title')}
           </h2>
@@ -225,7 +225,7 @@ export function Chat() {
               className={cn(
                 'w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left transition-colors cursor-pointer',
                 activeChannel?.id === channel.id
-                  ? 'bg-blue-50 text-[#3B82F6] font-medium'
+                  ? 'bg-blue-50 text-[#009EE0] font-medium'
                   : 'text-gray-600 hover:bg-gray-50'
               )}
             >
@@ -245,7 +245,7 @@ export function Chat() {
             >
               {getInitials(authorName)}
             </div>
-            <span className="text-sm font-medium text-[#1E2761] truncate">
+            <span className="text-sm font-medium text-[#003B80] truncate">
               {authorName}
             </span>
           </div>
@@ -258,7 +258,7 @@ export function Chat() {
         {activeChannel && (
           <div className="px-6 py-3 border-b border-gray-100 flex items-center justify-between">
             <div>
-              <h3 className="font-semibold text-[#1E2761] flex items-center gap-2">
+              <h3 className="font-semibold text-[#003B80] flex items-center gap-2">
                 <Hash size={16} />
                 {activeChannel.name}
               </h3>
@@ -324,7 +324,7 @@ export function Chat() {
                     <div className="flex-1 min-w-0">
                       {!compact && (
                         <div className="flex items-baseline gap-2">
-                          <span className="font-semibold text-sm text-[#1E2761]">
+                          <span className="font-semibold text-sm text-[#003B80]">
                             {msg.author_name}
                           </span>
                           <span className="text-xs text-gray-400">
@@ -359,13 +359,13 @@ export function Chat() {
                     ? `Message dans #${activeChannel.name}...`
                     : `Message in #${activeChannel.name}...`
                 }
-                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent"
+                className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#009EE0] focus:border-transparent"
                 autoFocus
               />
               <button
                 onClick={handleSend}
                 disabled={!newMessage.trim()}
-                className="p-2.5 bg-[#3B82F6] text-white rounded-lg hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="p-2.5 bg-[#009EE0] text-white rounded-lg hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 <Send size={18} />
               </button>

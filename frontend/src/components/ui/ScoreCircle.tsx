@@ -20,7 +20,7 @@ export function ScoreCircle({ score, size = 'md', showLabel, label }: ScoreCircl
   const colorClass = getScoreColor(score)
 
   const strokeColor =
-    score >= 3.5 ? '#059669' : score >= 2.5 ? '#D97706' : '#DC2626'
+    score >= 3.5 ? '#00A15F' : score >= 2.5 ? '#E4751F' : '#E2001A'
 
   return (
     <div className="flex flex-col items-center gap-1">

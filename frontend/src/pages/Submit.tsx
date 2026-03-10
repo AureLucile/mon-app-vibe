@@ -57,17 +57,17 @@ export function Submit() {
         <Card>
           <CardContent className="flex flex-col items-center py-16 gap-6">
             <div className="relative">
-              <Loader2 size={48} className="text-[#3B82F6] animate-spin" />
+              <Loader2 size={48} className="text-[#009EE0] animate-spin" />
             </div>
             <div className="text-center">
-              <h2 className="text-xl font-semibold text-[#1E2761]">
+              <h2 className="text-xl font-semibold text-[#003B80]">
                 {t('submit.analyzing')}
               </h2>
               <p className="text-gray-500 mt-2">{t('submit.analyzingDesc')}</p>
               <p className="text-sm text-gray-400 mt-4">{t('submit.estimatedTime')}</p>
             </div>
             <div className="w-64 h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-[#3B82F6] rounded-full animate-pulse" style={{ width: '60%' }} />
+              <div className="h-full bg-[#009EE0] rounded-full animate-pulse" style={{ width: '60%' }} />
             </div>
           </CardContent>
         </Card>
@@ -77,7 +77,7 @@ export function Submit() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold text-[#1E2761]">{t('submit.title')}</h1>
+      <h1 className="text-2xl font-bold text-[#003B80]">{t('submit.title')}</h1>
 
       {/* Warning */}
       <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
@@ -100,7 +100,7 @@ export function Submit() {
               className={cn(
                 'border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-colors',
                 isDragging
-                  ? 'border-[#3B82F6] bg-blue-50'
+                  ? 'border-[#009EE0] bg-blue-50'
                   : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
               )}
             >
@@ -122,9 +122,9 @@ export function Submit() {
           ) : (
             <div className="flex items-center justify-between p-4 bg-blue-50 border border-blue-200 rounded-lg">
               <div className="flex items-center gap-3">
-                <FileText size={24} className="text-[#3B82F6]" />
+                <FileText size={24} className="text-[#009EE0]" />
                 <div>
-                  <p className="text-sm font-medium text-[#1E2761]">{file.name}</p>
+                  <p className="text-sm font-medium text-[#003B80]">{file.name}</p>
                   <p className="text-xs text-gray-500">
                     {(file.size / 1024 / 1024).toFixed(1)} Mo
                   </p>
@@ -144,7 +144,7 @@ export function Submit() {
       {/* Meeting Type */}
       <Card>
         <CardContent className="py-6">
-          <label className="block text-sm font-semibold text-[#1E2761] mb-3">
+          <label className="block text-sm font-semibold text-[#003B80] mb-3">
             {t('submit.meetingType')}
           </label>
           <div className="grid grid-cols-2 gap-3">
@@ -155,11 +155,11 @@ export function Submit() {
                 className={cn(
                   'p-4 rounded-lg border-2 text-left transition-colors cursor-pointer',
                   meetingType === mt.id
-                    ? 'border-[#3B82F6] bg-blue-50'
+                    ? 'border-[#009EE0] bg-blue-50'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 )}
               >
-                <p className="font-medium text-sm text-[#1E2761]">
+                <p className="font-medium text-sm text-[#003B80]">
                   {lang === 'fr' ? mt.labelFr : mt.labelEn}
                 </p>
                 <p className="text-xs text-gray-500 mt-1">
@@ -174,7 +174,7 @@ export function Submit() {
       {/* Audience */}
       <Card>
         <CardContent className="py-6">
-          <label className="block text-sm font-semibold text-[#1E2761] mb-3">
+          <label className="block text-sm font-semibold text-[#003B80] mb-3">
             {t('submit.audience')}
           </label>
           <div className="flex gap-3">
@@ -185,7 +185,7 @@ export function Submit() {
                 className={cn(
                   'px-4 py-2 rounded-lg border text-sm font-medium transition-colors cursor-pointer',
                   audience === a.id
-                    ? 'border-[#3B82F6] bg-blue-50 text-[#3B82F6]'
+                    ? 'border-[#009EE0] bg-blue-50 text-[#009EE0]'
                     : 'border-gray-200 text-gray-600 hover:border-gray-300'
                 )}
               >

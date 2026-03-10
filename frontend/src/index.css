@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "Source Sans Pro", system-ui, sans-serif;
+  --font-sans: "Nunito Sans", system-ui, sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #F8FAFC;
-  color: #1E2761;
+  background-color: #F5F7FA;
+  color: #003B80;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

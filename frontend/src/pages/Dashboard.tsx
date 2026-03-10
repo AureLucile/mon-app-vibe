@@ -38,7 +38,7 @@ export function Dashboard() {
       label: t('dashboard.totalSubmissions'),
       value: mockSubmissions.length,
       icon: FileText,
-      color: 'text-blue-600 bg-blue-50',
+      color: 'text-[#009EE0] bg-[#009EE0]/10',
     },
     {
       label: t('dashboard.avgScore'),
@@ -68,7 +68,7 @@ export function Dashboard() {
   return (
     <div className="max-w-6xl space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-[#1E2761]">{t('dashboard.welcome')}</h1>
+        <h1 className="text-2xl font-bold text-[#003B80]">{t('dashboard.welcome')}</h1>
         <p className="text-gray-500 mt-1">{t('dashboard.subtitle')}</p>
       </div>
 
@@ -81,7 +81,7 @@ export function Dashboard() {
                 <stat.icon size={22} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-[#1E2761]">{stat.value}</p>
+                <p className="text-2xl font-bold text-[#003B80]">{stat.value}</p>
                 <p className="text-sm text-gray-500">{stat.label}</p>
               </div>
             </CardContent>
@@ -93,7 +93,7 @@ export function Dashboard() {
         {/* Score Evolution Chart */}
         <Card className="col-span-2">
           <CardHeader>
-            <h2 className="font-semibold text-[#1E2761]">{t('dashboard.scoreEvolution')}</h2>
+            <h2 className="font-semibold text-[#003B80]">{t('dashboard.scoreEvolution')}</h2>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -105,9 +105,9 @@ export function Dashboard() {
                 <Line
                   type="monotone"
                   dataKey="score"
-                  stroke="#3B82F6"
+                  stroke="#009EE0"
                   strokeWidth={2.5}
-                  dot={{ r: 5, fill: '#3B82F6' }}
+                  dot={{ r: 5, fill: '#009EE0' }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -117,7 +117,7 @@ export function Dashboard() {
         {/* Quick Submit */}
         <Card>
           <CardHeader>
-            <h2 className="font-semibold text-[#1E2761]">{t('dashboard.quickSubmit')}</h2>
+            <h2 className="font-semibold text-[#003B80]">{t('dashboard.quickSubmit')}</h2>
           </CardHeader>
           <CardContent className="flex flex-col items-center justify-center h-52 gap-4">
             <ScoreCircle score={avgScore} size="md" />
@@ -134,7 +134,7 @@ export function Dashboard() {
       {/* Recent Submissions */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <h2 className="font-semibold text-[#1E2761]">{t('dashboard.recentSubmissions')}</h2>
+          <h2 className="font-semibold text-[#003B80]">{t('dashboard.recentSubmissions')}</h2>
           <Link to="/history">
             <Button variant="ghost" size="sm">
               {t('common.view')}
@@ -156,7 +156,7 @@ export function Dashboard() {
             <tbody>
               {mockSubmissions.slice(0, 5).map((sub) => (
                 <tr key={sub.id} className="border-b border-gray-50 hover:bg-gray-50/50">
-                  <td className="px-6 py-3 text-sm font-medium text-[#1E2761]">
+                  <td className="px-6 py-3 text-sm font-medium text-[#003B80]">
                     {sub.fileName}
                   </td>
                   <td className="px-6 py-3 text-sm text-gray-600">

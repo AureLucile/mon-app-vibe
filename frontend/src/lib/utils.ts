@@ -6,15 +6,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getScoreColor(score: number): string {
-  if (score >= 3.5) return 'text-emerald-600'
-  if (score >= 2.5) return 'text-amber-500'
-  return 'text-red-600'
+  if (score >= 3.5) return 'text-[#00A15F]'
+  if (score >= 2.5) return 'text-[#E4751F]'
+  return 'text-[#E2001A]'
 }
 
 export function getScoreBgColor(score: number): string {
-  if (score >= 3.5) return 'bg-emerald-50 border-emerald-200'
-  if (score >= 2.5) return 'bg-amber-50 border-amber-200'
-  return 'bg-red-50 border-red-200'
+  if (score >= 3.5) return 'bg-[#00A15F]/10 border-[#00A15F]/20'
+  if (score >= 2.5) return 'bg-[#E4751F]/10 border-[#E4751F]/20'
+  return 'bg-[#E2001A]/10 border-[#E2001A]/20'
 }
 
 export function getScoreLabel(score: number, lang: string = 'fr'): string {

@@ -64,7 +64,7 @@ export function Results() {
         </Link>
       </div>
 
-      <h1 className="text-2xl font-bold text-[#1E2761]">{t('results.title')}</h1>
+      <h1 className="text-2xl font-bold text-[#003B80]">{t('results.title')}</h1>
 
       {/* Overall Score + Radar */}
       <div className="grid grid-cols-2 gap-6">
@@ -95,8 +95,8 @@ export function Results() {
                 <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10 }} />
                 <Radar
                   dataKey="score"
-                  stroke="#3B82F6"
-                  fill="#3B82F6"
+                  stroke="#009EE0"
+                  fill="#009EE0"
                   fillOpacity={0.2}
                   strokeWidth={2}
                 />
@@ -109,14 +109,14 @@ export function Results() {
       {/* Criteria Breakdown */}
       <Card>
         <CardHeader>
-          <h2 className="font-semibold text-[#1E2761]">{t('results.criteriaBreakdown')}</h2>
+          <h2 className="font-semibold text-[#003B80]">{t('results.criteriaBreakdown')}</h2>
         </CardHeader>
         <CardContent className="space-y-5">
           {report.criteriaScores.map((criterion) => (
             <div key={criterion.name} className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="font-medium text-sm text-[#1E2761]">
+                  <span className="font-medium text-sm text-[#003B80]">
                     {criterion.name}
                   </span>
                   <Badge variant="info">{t('results.weight')}: {criterion.weight}%</Badge>
@@ -142,7 +142,7 @@ export function Results() {
         <Card>
           <CardHeader className="flex flex-row items-center gap-2">
             <CheckCircle2 size={18} className="text-emerald-600" />
-            <h2 className="font-semibold text-[#1E2761]">{t('results.strengths')}</h2>
+            <h2 className="font-semibold text-[#003B80]">{t('results.strengths')}</h2>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
@@ -159,7 +159,7 @@ export function Results() {
         <Card>
           <CardHeader className="flex flex-row items-center gap-2">
             <AlertCircle size={18} className="text-amber-500" />
-            <h2 className="font-semibold text-[#1E2761]">{t('results.improvements')}</h2>
+            <h2 className="font-semibold text-[#003B80]">{t('results.improvements')}</h2>
           </CardHeader>
           <CardContent>
             <ol className="space-y-3">
@@ -177,8 +177,8 @@ export function Results() {
       {/* Suggestions */}
       <Card>
         <CardHeader className="flex flex-row items-center gap-2">
-          <Lightbulb size={18} className="text-[#3B82F6]" />
-          <h2 className="font-semibold text-[#1E2761]">{t('results.suggestions')}</h2>
+          <Lightbulb size={18} className="text-[#009EE0]" />
+          <h2 className="font-semibold text-[#003B80]">{t('results.suggestions')}</h2>
         </CardHeader>
         <CardContent className="space-y-4">
           {report.suggestions.map((sug, i) => {
@@ -186,8 +186,8 @@ export function Results() {
             return (
               <div key={i} className="p-4 bg-gray-50 rounded-lg border border-gray-100">
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon size={16} className="text-[#3B82F6]" />
-                  <span className="text-sm font-semibold text-[#1E2761]">
+                  <Icon size={16} className="text-[#009EE0]" />
+                  <span className="text-sm font-semibold text-[#003B80]">
                     {t(`suggestion.${sug.type}`)}
                   </span>
                   {sug.slideRef && (
@@ -214,9 +214,9 @@ export function Results() {
       </Card>
 
       {/* Encouragement */}
-      <Card className="border-[#3B82F6]/20 bg-blue-50/50">
+      <Card className="border-[#009EE0]/20 bg-blue-50/50">
         <CardContent className="py-6">
-          <p className="text-sm text-[#1E2761] leading-relaxed italic">
+          <p className="text-sm text-[#003B80] leading-relaxed italic">
             "{report.encouragement}"
           </p>
         </CardContent>
