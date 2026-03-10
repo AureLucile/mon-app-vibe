@@ -8,12 +8,22 @@ export interface AnalysisResult {
   downloadUrl: string | null
 }
 
+const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50 MiB
+
 export async function analyzePresentation(
   file: File,
   meetingType: MeetingType,
   audience: AudienceType | null,
   lang: string
 ): Promise<AnalysisResult> {
+  // 0. Validate file
+  if (!file.name.toLowerCase().endsWith('.pptx')) {
+    throw new Error('Seuls les fichiers .pptx sont acceptés')
+  }
+  if (file.size > MAX_FILE_SIZE) {
+    throw new Error('Le fichier dépasse la taille maximale de 50 Mo')
+  }
+
   // 1. Parse PPTX client-side to extract slide text
   const slides = await parsePptx(file)
   if (slides.length === 0) {
